@@ -3,8 +3,8 @@ import { FaTimes } from "react-icons/fa";
 
 export default function Task({ task, onDelete }) {
   // Path to your audio file (update the path accordingly)
-  // const alarmSound = new Audio("/sound/sound.wav");
-  const alarmSound = new Audio(`${process.env.PUBLIC_URL}/sound/sound.wav`);
+  const alarmSound = new Audio("/sound/sound.wav");
+  // const alarmSound = new Audio(`${process.env.PUBLIC_URL}/sound/sound.wav`);
 
   // Function to trigger an alarm based on task's reminder time
   const triggerAlarm = () => {
