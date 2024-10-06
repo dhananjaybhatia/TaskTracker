@@ -3,8 +3,7 @@ import { FaTimes } from "react-icons/fa";
 
 export default function Task({ task, onDelete }) {
   // Path to your audio file (update the path accordingly)
-  // const alarmSound = new Audio("/sound/sound.wav");
-  const alarmSound = new Audio("/sound/beep-01a.mp3");
+  const alarmSound = new Audio("/sound/sound.wav");
   // const alarmSound = new Audio(
   //   "https://dhananjaybhatia.github.io/TaskTracker/sound/sound.wav"
   // );
