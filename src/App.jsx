@@ -27,7 +27,7 @@ export default function App() {
   // Add Task
   const addTask = (task) => {
     const newTask = { id: uuidv4(), ...task };
-    setTasks([...tasks, newTask]);
+    setTasks([newTask, ...tasks]);
   };
 
   return (
