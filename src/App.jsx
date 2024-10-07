@@ -1,12 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "./components/Header"; // Use the correct relative path
 import Tasks from "./components/Tasks"; // Use the correct relative path
 import { v4 as uuidv4 } from "uuid";
 import AddTask from "./components/AddTask";
 
 export default function App() {
+  // State to control visibility of Add Task form
   const [showAddTask, setShowAddTask] = useState(true);
-  const [tasks, setTasks] = useState([]);
+
+  // State to manage tasks, initialized from localStorage if available
+  const [tasks, setTasks] = useState(() => {
+    const savedTasks = localStorage.getItem("tasks");
+    return savedTasks ? JSON.parse(savedTasks) : [];
+  });
+
+  // useEffect to save tasks to localStorage whenever the tasks state changes
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
 
   // Delete Task
   const deleteTask = (id) => {
@@ -14,7 +25,6 @@ export default function App() {
   };
 
   // Add Task
-
   const addTask = (task) => {
     const newTask = { id: uuidv4(), ...task };
     setTasks([...tasks, newTask]);
@@ -30,7 +40,7 @@ export default function App() {
       {tasks.length > 0 ? (
         <Tasks tasks={tasks} onDelete={deleteTask} />
       ) : (
-        <p className="text-orange-700 font-semibold"> No Task to Show!</p>
+        <p className="text-orange-700 font-semibold">No Task to Show!</p>
       )}
     </div>
   );
