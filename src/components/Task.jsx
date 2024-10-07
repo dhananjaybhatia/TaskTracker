@@ -10,6 +10,20 @@ export default function Task({ task, onDelete }) {
 
   const alarmSound = new Audio("/TaskTracker/sound/sound.wav");
 
+  // Warm up the audio for Chrome autoplay restrictions
+  const warmUpAudio = () => {
+    alarmSound.muted = true;
+    alarmSound
+      .play()
+      .then(() => {
+        alarmSound.pause(); // Stop the muted sound
+        alarmSound.muted = false; // Unmute it for later use
+      })
+      .catch((error) => {
+        console.error("Audio warm-up failed: ", error);
+      });
+  };
+
   // Function to trigger an alarm based on task's reminder time
   const triggerAlarm = () => {
     const currentTime = new Date().getTime();
