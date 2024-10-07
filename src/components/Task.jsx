@@ -48,6 +48,19 @@ export default function Task({ task, onDelete }) {
     }
   };
 
+  // Warm up audio after user interaction
+  useEffect(() => {
+    const enableAudioOnInteraction = () => {
+      warmUpAudio();
+      window.removeEventListener("click", enableAudioOnInteraction);
+    };
+
+    window.addEventListener("click", enableAudioOnInteraction);
+
+    return () => {
+      window.removeEventListener("click", enableAudioOnInteraction);
+    };
+  }, []);
   // Save reminder state to localStorage whenever it changes
   useEffect(() => {
     localStorage.setItem(task.id, JSON.stringify(reminder));
